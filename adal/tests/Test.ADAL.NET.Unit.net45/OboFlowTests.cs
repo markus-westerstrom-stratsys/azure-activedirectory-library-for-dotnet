@@ -430,9 +430,8 @@ namespace Test.ADAL.NET.Unit
 
             //assertion hash should be stored in the cache entry.
             var expectedHash = _crypto.CreateSha256Hash(accessToken);
-            var actualHash = context.TokenCache.tokenCacheDictionary.Values.First().UserAssertionHash;
-            var otherHash = context.TokenCache.tokenCacheDictionary.Values.ElementAt(1).UserAssertionHash;
-            Assert.AreEqual(expectedHash, actualHash);
+
+            Assert.IsTrue(context.TokenCache.tokenCacheDictionary.Values.Any(v => v.UserAssertionHash == expectedHash));
         }
 
         [TestMethod]
